@@ -1,11 +1,18 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import WeatherCard from "@/components/WeatherCard";
 
+type WeatherData = {
+  name: string;
+  sys: { country: string };
+  main: { temp: number; humidity: number };
+  weather: { description: string; icon: string }[];
+};
+
 export default function Home() {
-  const [weather, setWeather] = useState<any>(null);
+  const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(false);
 
   // Função para buscar coordenadas a partir do nome da cidade
@@ -27,11 +34,13 @@ export default function Home() {
       } else {
         throw new Error("Cidade não encontrada!");
       }
-    } catch (error: any) {
-      alert(error.message || "Erro ao buscar coordenadas!");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(error.message || "Erro ao buscar coordenadas!");
+      } else {
+        alert("Erro desconhecido!");
+      }
       setWeather(null);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -49,15 +58,18 @@ export default function Home() {
       }
 
       setWeather(data); // Salva os dados recebidos
-    } catch (error: any) {
-      alert(error.message || "Erro na busca!");
-      setWeather(null); // Limpa os dados se houver erro
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(error.message || "Erro ao buscar coordenadas!");
+      } else {
+        alert("Erro desconhecido!");
+      }
+      setWeather(null);
     }
   };
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-gray-100">
-
       <SearchBar onSearch={fetchCoordinates} />
 
       {loading && <p className="text-blue-500 mt-4">Buscando dados...</p>}
