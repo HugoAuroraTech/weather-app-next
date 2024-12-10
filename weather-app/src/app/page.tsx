@@ -30,6 +30,7 @@ export default function Home() {
 
       if (data.length > 0) {
         const { lat, lon } = data[0];
+        setLoading(false);
         fetchWeatherByCoords(lat.toString(), lon.toString());
       } else {
         throw new Error("Cidade não encontrada!");
@@ -52,6 +53,7 @@ export default function Home() {
     try {
       const response = await fetch(weatherUrl);
       const data = await response.json();
+      setLoading(false);
 
       if (!response.ok) {
         throw new Error("Erro ao buscar dados climáticos!");
@@ -69,7 +71,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-gray-100">
+    <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-white">
       <SearchBar onSearch={fetchCoordinates} />
 
       {loading && <p className="text-blue-500 mt-4">Buscando dados...</p>}

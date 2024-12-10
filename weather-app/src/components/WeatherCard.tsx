@@ -1,4 +1,3 @@
-import Image from "next/image";
 type WeatherData = {
   name: string;
   sys: { country: string };
@@ -12,11 +11,11 @@ type WeatherCardProps = {
 
 export default function WeatherCard({ weather }: WeatherCardProps) {
   return (
-    <div className="bg-white p-8 rounded shadow-md mt-8 w-80 text-center text-black">
+    <div className="shadow-md bg-white p-8 rounded-2xl mt-8  w-80 text-center text-black">
       <h2 className="text-2x1 text-black font-bold">
         {weather.name}, {weather.sys.country}
       </h2>
-      <Image
+      <img
         src={`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`}
         alt={weather.weather[0].description}
         className="mx-auto"
