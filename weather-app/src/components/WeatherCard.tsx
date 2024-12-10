@@ -11,18 +11,24 @@ type WeatherCardProps = {
 
 export default function WeatherCard({ weather }: WeatherCardProps) {
   return (
-    <div className="shadow-md bg-white p-8 rounded-2xl mt-8  w-80 text-center text-black">
-      <h2 className="text-2x1 text-black font-bold">
+    <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md w-full h-full m-8 ">
+      <h2 className="text-2xl font-bold text-blue-500 text-center">
         {weather.name}, {weather.sys.country}
       </h2>
-      <img
-        src={`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`}
-        alt={weather.weather[0].description}
-        className="mx-auto"
-      />
-      <p className="text-x1 text-black">Temperature: {weather.main.temp} °C</p>
-      <p className="text-lg text-black">Humidity: {weather.main.humidity} %</p>
-      <p className="italic text-black">{weather.weather[0].description}</p>
+      <div className="flex flex-col items-center">
+        <img
+          src={`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`}
+          alt={weather.weather[0].description}
+          className="mx-auto"
+        />
+        <p className="text-x1 text-black">
+          Temperature: {weather.main.temp} °C
+        </p>
+        <p className="text-lg text-black">
+          Humidity: {weather.main.humidity} %
+        </p>
+        <p className="italic text-black">{weather.weather[0].description}</p>
+      </div>
     </div>
   );
 }

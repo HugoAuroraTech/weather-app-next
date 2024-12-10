@@ -71,12 +71,12 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-white">
+    <main className="bg-weather-background bg-cover flex flex-col items-center justify-center min-h-screen p-8 ">
+      {weather && <WeatherCard weather={weather} />}
+
       <SearchBar onSearch={fetchCoordinates} />
 
       {loading && <p className="text-blue-500 mt-4">Buscando dados...</p>}
-
-      {weather && <WeatherCard weather={weather} />}
     </main>
   );
 }

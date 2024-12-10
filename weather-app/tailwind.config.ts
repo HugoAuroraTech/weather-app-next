@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      backgroundImage: {
+        "weather-background": "url('/background.jpg')",
+      },
     },
   },
   plugins: [],
